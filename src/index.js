@@ -1,7 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+//React
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+//Bootstrap
+import "bootstrap/dist/js/bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+
+//Custom
 import './index.css';
 import App from './App';
+
+//Config
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
