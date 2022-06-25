@@ -3,4 +3,9 @@
     padding: 0;
     height: 100%;
     border: 1px solid blue;
+    overflow: hidden;
+}
+
+.header{
+    height: 50px;
 }
