@@ -6,7 +6,7 @@ Receive :
 */
 export const Modal = props => {
     return (
-        <div className="modal fade" id={props.modalId} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id={props.modalId} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -17,8 +17,8 @@ export const Modal = props => {
                         {props.children}
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal">{props.submitText}</button>
-                        <button type="button" className="btn btn-success">{props.cancelText}</button>
+                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal">{props.cancelText}</button>
+                        <button type="button" className="btn btn-success">{props.submitText}</button>
                     </div>
                 </div>
             </div>
