@@ -17,10 +17,15 @@ const pool = mysql.createPool(conectionOptionObject);
 //GET requests --------
 itemRoute.get("", (req, res)=> {
 
+
+    console.log( JSON.parse("[\"Clothes\", \"Summer\", \"T-shirt\", \"Red and yellow\"]") );
+
+
+
     pool.getConnection(( err, connection ) => {
         
         if(err) return res.status(504).send(sendError(`An internal error occured when connecteing to the DataBase : ${err.message}`));
-        connection.query("SELECT * FROM items", (err, rows) => {
+        connection.query("SELECT * FROM itemsView", (err, rows) => {
                 
             //releasing the connection object after we are done with it
             connection.release();

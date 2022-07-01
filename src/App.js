@@ -1,7 +1,10 @@
 import './App.css';
+import React from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, ModelToggler } from './components/Modal';
 import Item from "./components/Item";
 
+/*
 const data = [
     {
         id : 123,
@@ -14,8 +17,25 @@ const data = [
         ownerId : "Me"
     }
 ]
+*/
 
 const App = () => {
+    const [data, setData]  = useState([{}]);
+   
+    
+
+
+    useEffect(()=>{
+
+        fetch("api/items")
+        .then( response => response.json())
+        .then( data => { setData(data); })
+        .catch(err => { console.log(err); });
+
+    }, []);
+
+    
+
     return(
         <div className='App container-fluid'>
             
@@ -120,21 +140,20 @@ const App = () => {
 
                         <tbody>
                             {
-                                data.map( item => {
+                               
+                               (data.length > 0 ) && data.map( item => {
                                     const { id, image, title, description, tagLine, colors, price, ownerId} = item;
-                                    return(
-                                        <Item 
-                                            key={id}
-                                            id = {id} 
-                                            image = {image}
-                                            title = {title}
-                                            description = {description}
-                                            tagLine = {tagLine}
-                                            colors = {colors}
-                                            price = {price}
-                                            ownerId = {ownerId}
-                                        />
-                                    );
+                                    <Item 
+                                        key={id}
+                                        id = {id} 
+                                        image = {image}
+                                        title = {title}
+                                        description = {description}
+                                        tagLine = {tagLine}
+                                        colors = {colors}
+                                        price = {price}
+                                        ownerId = {ownerId}
+                                    /> 
                                 })
                             }
 
