@@ -18,7 +18,7 @@ const pool = mysql.createPool(conectionOptionObject);
 itemRoute.get("", (req, res)=> {
 
 
-    console.log( JSON.parse("[\"Clothes\", \"Summer\", \"T-shirt\", \"Red and yellow\"]") );
+    //console.log( JSON.parse("[\"Clothes\", \"Summer\", \"T-shirt\", \"Red and yellow\"]") );
 
 
 
