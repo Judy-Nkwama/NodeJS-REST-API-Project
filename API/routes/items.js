@@ -7,19 +7,13 @@ const sendError = require("../utilities/sendError");
 
 
 const itemRoute = express.Router();
-
 const conectionOptionObject = require("../config/config").db_conection_options;
-
 
 
 const pool = mysql.createPool(conectionOptionObject);
 
 //GET requests --------
 itemRoute.get("", (req, res)=> {
-
-
-    //console.log( JSON.parse("[\"Clothes\", \"Summer\", \"T-shirt\", \"Red and yellow\"]") );
-
 
 
     pool.getConnection(( err, connection ) => {

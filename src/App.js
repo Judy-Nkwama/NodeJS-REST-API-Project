@@ -1,7 +1,8 @@
 import './App.css';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Modal, ModelToggler } from './components/Modal';
+import { ModelToggler } from './components/Modal';
+import { LoginModal, ItemModal } from "./components/ModalTemplates";
 import Item from "./components/Item";
 
 /*
@@ -56,26 +57,12 @@ const App = () => {
     return(
         <div className='App container-fluid'>
             
-            <Modal modalId="loginPopUp" title="Login" cancelText="Cancel" submitText="Login">
-                <form>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="exampleInputEmail1" />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" />
-                    </div>
-                    <div className="mb-3 form-check">
-                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                        <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                    </div>
-                </form>
-            </Modal>
+            <LoginModal />
+            <ItemModal title="Add New Item" subBtnTitle="Add"/>
 
             <div className='header row border-bottom'>
                 <div className='col text-end pt-1 me-1'>
-                    <ModelToggler className="btn btn-sm btn-primary" modalId="loginPopUp" title="login" /> 
+                    <ModelToggler className="btn btn-sm btn-primary" modalId="loginPopUp">login</ModelToggler> 
                 </div>
             </div>
 
@@ -127,12 +114,12 @@ const App = () => {
                                 Search
                             </button>
                         </form>
-                        <button className='btn btn-sm btn-primary'>
+                        <ModelToggler className='btn btn-sm btn-primary' modalId="itemModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                             </svg> 
                             New <span className="d-none d-sm-inline">Item</span>
-                        </button>
+                        </ModelToggler>
                     </div>
 
                 </div>

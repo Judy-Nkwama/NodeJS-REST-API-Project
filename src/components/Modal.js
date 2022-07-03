@@ -7,7 +7,7 @@ Receive :
 export const Modal = props => {
     return (
         <div className="modal fade" id={props.modalId} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog">
+            <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">{props.title}</h5>
@@ -29,7 +29,7 @@ export const Modal = props => {
 export const ModelToggler = props => {
     return(
         <button type="button" className={props.className} data-bs-toggle="modal" data-bs-target={`#${props.modalId}`}>
-            {props.title}
+            {props.children}
         </button>
     );
 };
