@@ -22,7 +22,6 @@ const data = [
 
 const mapData = data => {
     if( data.length > 0 ){
-        console.log(data)
         return (
             data.map( item => {
                 const { id, image_is_set, title, description, tagLine, colourString, price, name} = item;

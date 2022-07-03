@@ -10,7 +10,13 @@
     height: 50px;
 }
 
-.item-image{
+.item-image-block{
     height: 200px;
     width: 200px;
+}
+
+.item-image{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
