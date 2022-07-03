@@ -7,7 +7,7 @@ Receive :
 export const Modal = props => {
     return (
         <div className="modal fade" id={props.modalId} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+            <div className={ `modal-dialog modal-dialog-scrollable ${props.role == "itemModal" ? "modal-lg" : "modal-dialog-centered"} `}>
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">{props.title}</h5>

@@ -22,9 +22,10 @@ const data = [
 
 const mapData = data => {
     if( data.length > 0 ){
+        console.log(data)
         return (
             data.map( item => {
-                const { id, image_is_set, title, description, tagLine, colourString, price, ownerId} = item;
+                const { id, image_is_set, title, description, tagLine, colourString, price, name} = item;
                 return( <Item 
                     key={id}
                     id = {id} 
@@ -34,7 +35,7 @@ const mapData = data => {
                     tagLine = {JSON.parse(tagLine)}
                     colors = {JSON.parse(colourString)}
                     price = {price}
-                    ownerId = {ownerId}
+                    ownerName = {name}
                 />);
             })
         );
