@@ -50,7 +50,7 @@ const App = () => {
     useEffect( ()=>{
         fetch("api/items")
         .then( response => response.json())
-        .then( data => { setData(data); console.log(data)})
+        .then( data => { setData(data);})
         .catch(err => { console.log(err); });
     }, []);
 
