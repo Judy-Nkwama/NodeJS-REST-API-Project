@@ -9,10 +9,7 @@ const sendError = require("../utilities/sendError");
 const itemRoute = express.Router();
 const conectionOptionObject = require("../config/config").db_conection_options;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> cd3d2c1e0380f2f57f4339dfde7a975841c85c64
 const pool = mysql.createPool(conectionOptionObject);
 
 //GET requests --------
