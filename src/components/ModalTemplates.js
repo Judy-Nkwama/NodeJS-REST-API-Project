@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Modal } from './Modal';
 
 export const LoginModal = () => {
@@ -27,7 +27,7 @@ const Color = props => {
     return(
         <div className="d-inline-flex p-1 rounded border bg-white">
             <div className="p-3 rounded" style={{ background : props.color }}></div>
-            <button className='btn btn-danger btn-sm' >
+            <button className='btn btn-danger btn-sm' onClick={ event => {props.deleteFunction(); event.preventDefault(); } }>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                     <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -42,12 +42,19 @@ export const ItemModal = props => {
     const [ title, setTitle ] = useState("");
     const [ price, setPrice ] = useState(0.1);
     const [ description, setDescription ] = useState("");
-    const [ colors, setColors ] = useState(["#A7A7A7", "#A7A7A7"]);
+    const [ colors, setColors ] = useState([]);
+    const [ currentColor, setCurrentColor ] = useState("#39015c");
 
 
+    const handleColorAdd = () => {
+        if( !colors.find( color_i => color_i.toString() == currentColor.toString() ) ){
+            setColors([...colors, currentColor]);
+        }
+    };
 
-
-
+    const handleColorDelete = color_i => {
+        setColors( colors.slice(colors.indexOf(color_i)) );
+    }
 
 
     return(
@@ -84,9 +91,16 @@ export const ItemModal = props => {
                         </div>
 
                         <div className='mb-1 bg-light p-1 ps-0 rounded'>
-                            <input type="color" className="form-control form-control-sm form-control-color" id="itemColours" value="#563d7c" onChange={()=>{}} title="Choose item colors"></input>
+                            <div className="input-group">
+                                <input type="color" className="form-control form-control-sm form-control-color" id="itemColours" 
+                                    value={currentColor} title="Choose item colors" onChange={ event => {setCurrentColor(event.target.value)}}
+                                />
+                                <button className="btn btn-primary" type="button" 
+                                    onClick={ handleColorAdd }
+                                >Add</button>
+                            </div>
                             {
-                                colors.map( color_i => <Color key={color_i} color={color_i} />)
+                                colors.map( color_i => <Color key={color_i} color={color_i} deleteFunction={ color_to_del => handleColorDelete(color_to_del) } />)
                             }
                         </div>
                         
