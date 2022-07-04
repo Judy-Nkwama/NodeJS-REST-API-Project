@@ -7,18 +7,22 @@ const sendError = require("../utilities/sendError");
 
 
 const itemRoute = express.Router();
-
 const conectionOptionObject = require("../config/config").db_conection_options;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> cd3d2c1e0380f2f57f4339dfde7a975841c85c64
 const pool = mysql.createPool(conectionOptionObject);
 
 //GET requests --------
 itemRoute.get("", (req, res)=> {
 
+
     pool.getConnection(( err, connection ) => {
         
         if(err) return res.status(504).send(sendError(`An internal error occured when connecteing to the DataBase : ${err.message}`));
-        connection.query("SELECT * FROM items", (err, rows) => {
+        connection.query("SELECT * FROM itemsView", (err, rows) => {
                 
             //releasing the connection object after we are done with it
             connection.release();

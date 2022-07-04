@@ -20,7 +20,7 @@ const Item = props => {
                 ></span>) }
             </td>
             <td>{ props.price }$</td>
-            <td>{ props.ownerId }</td>
+            <td>{ props.ownerName }</td>
             <td>
                 <div className='d-flex'>
                     <button className='btn btn-secondary me-1' >
