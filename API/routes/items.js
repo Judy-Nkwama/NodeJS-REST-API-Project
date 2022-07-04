@@ -10,8 +10,6 @@ const itemRoute = express.Router();
 
 const conectionOptionObject = require("../config/config").db_conection_options;
 
-
-
 const pool = mysql.createPool(conectionOptionObject);
 
 //GET requests --------
