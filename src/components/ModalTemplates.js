@@ -22,10 +22,11 @@ export const LoginModal = () => {
     );
 };
 
-const Color = () => {
+const Color = props => {
+
     return(
-        <div className="d-flex">
-            <div className="p-2"></div>
+        <div className="d-inline-flex p-1 rounded border bg-white">
+            <div className="p-3 rounded" style={{ background : props.color }}></div>
             <button className='btn btn-danger btn-sm' >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -41,10 +42,7 @@ export const ItemModal = props => {
     const [ title, setTitle ] = useState("");
     const [ price, setPrice ] = useState(0.1);
     const [ description, setDescription ] = useState("");
-    const [ colors, setColors ] = useState([]);
-
-
-
+    const [ colors, setColors ] = useState(["#A7A7A7", "#A7A7A7"]);
 
 
 
@@ -87,6 +85,9 @@ export const ItemModal = props => {
 
                         <div className='mb-1 bg-light p-1 ps-0 rounded'>
                             <input type="color" className="form-control form-control-sm form-control-color" id="itemColours" value="#563d7c" onChange={()=>{}} title="Choose item colors"></input>
+                            {
+                                colors.map( color_i => <Color key={color_i} color={color_i} />)
+                            }
                         </div>
                         
                         <div className="input-group input-group-sm mb-1">
