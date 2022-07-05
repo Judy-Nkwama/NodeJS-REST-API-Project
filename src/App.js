@@ -2,8 +2,10 @@ import './App.css';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { ModelToggler } from './components/Modal';
-import { LoginModal, ItemModal } from "./components/ModalTemplates";
+import ItemForm from "./components/ItemForm";
+import LoginForm from "./components/LoginForm";
 import Item from "./components/Item";
+import Loading from "./components/Loading";
 
 /*
 const data = [
@@ -39,7 +41,7 @@ const mapData = data => {
             })
         );
     }else{
-        return(<tr><td><div>Loading...</div></td></tr>);
+        return(<tr></tr>);
     }
 }
 
@@ -56,9 +58,9 @@ const App = () => {
 
     return(
         <div className='App container-fluid'>
-            
-            <LoginModal />
-            <ItemModal title="Add New Item" subBtnTitle="Add"/>
+            <Loading data={data} />
+            <LoginForm />
+            <ItemForm title="Add New Item" subBtnTitle="Add"/>
 
             <div className='header row border-bottom'>
                 <div className='col text-end pt-1 me-1'>
