@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Modal } from './Modal';
 
 const DelBtn = props => {
@@ -32,9 +32,7 @@ const Tag = props => {
 
 const ItemForm = props => {
 
-    const [ image, setImage ] = useState({image : "/no-image.png"});
-    const [ image1, setImage1 ] = useState( "/no-image.png");
-
+    const [ image, setImage ] = useState( "/no-image.png");
 
 
     const [ title, setTitle ] = useState("");
@@ -49,8 +47,8 @@ const ItemForm = props => {
 
 
 
-    const hendleImageChange = new_image => {
-        setImage1(  new_image );
+    const hendleImageChange = file => {
+        setImage(URL.createObjectURL(file));
     };
 
     const handleColorAdd = () => {
@@ -74,7 +72,7 @@ const ItemForm = props => {
         setTags( tags.filter(tag_i => tag_i != tag) );
     };
 
-    alert(image1);
+    //alert(image1);
 
     return(
         <Modal modalId="itemModal" title={props.title} cancelText="Cancel" role="itemModal" submitText={props.subBtnTitle}>
@@ -82,12 +80,12 @@ const ItemForm = props => {
                 <form className='row'>
                     
                     <div className='col-lg-5 d-flex flex-column align-items-center '>
-                        <div className="item-image-block m-3 overflow-hidden rounded bg-light ">
-                            {(image_link => <img src={image_link} className='item-image' />)(image1)}
+                        <div className="item-image-block border m-3 overflow-hidden rounded bg-light ">
+                            <img src={image} className='item-image' />
                         </div>
                         <div className="">
                             <input type="file" accept="image/png, image/jpeg" className="form-control form-control-sm" id="itemImageInput" 
-                                onChange={event => hendleImageChange(event.target.value)}
+                                onChange={event => hendleImageChange(event.target.files[0])}
                             />
                         </div>
                     </div>
