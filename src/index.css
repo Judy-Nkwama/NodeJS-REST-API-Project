@@ -21,7 +21,7 @@ body {
 
 #root{
     margin: 0;
-    padding: 0px 6px 3px 3px;
+    padding: 0px 0px 0px 0px;
     width: 100%;
     height: 100%;
 }
@@ -44,3 +44,7 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.main-block-blur{
+    filter: blur(4px);
+};

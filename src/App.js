@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import { ModelToggler } from './components/Modal';
 import ItemForm from "./components/ItemForm";
@@ -48,9 +48,10 @@ const mapData = data => {
 const App = () => {
     
     const [data, setData]  = useState([]);
+    const main_block = useRef();
 
     useEffect( ()=>{
-        fetch("api/items")
+       fetch("api/items")
         .then( response => response.json())
         .then( data => { setData(data);})
         .catch(err => { console.log(err); });
@@ -58,7 +59,7 @@ const App = () => {
 
     return(
         <div className='App container-fluid'>
-            <Loading data={data} />
+            <Loading data={data} main_block={main_block} />
             <LoginForm />
             <ItemForm title="Add New Item" subBtnTitle="Add"/>
 
@@ -69,7 +70,7 @@ const App = () => {
             </div>
 
             {/* body  */}
-            <div className='container m-auto body row'>
+            <div ref={main_block} className={`main-block container m-auto body row`}>
                 
                 {/* top-bar  */}
                 <div className='col-12 p-3 d-flex'>
