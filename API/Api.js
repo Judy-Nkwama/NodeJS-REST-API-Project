@@ -12,7 +12,7 @@ const itemRoute = require("./routes/items");
 const app = express();
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
-app.use(express.static("uploads"));
+app.use("/assets", express.static(__dirname + "/uploads"));
 
 //req handling
 app.use("/api/items", itemRoute);

@@ -30,7 +30,7 @@ const mapData = data => {
                 return( <Item 
                     key={id}
                     id = {id} 
-                    image = {image_is_set ? "/1.png" : "https://incacar.com/img/no_image.jpg"}
+                    image = {image_is_set ? "/assets/1.png" : "https://incacar.com/img/no_image.jpg"}
                     title = {title}
                     description = {description}
                     tagLine = {JSON.parse(tagLine)}

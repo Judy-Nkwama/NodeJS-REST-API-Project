@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Modal } from './Modal';
 
 const DelBtn = props => {
@@ -32,7 +32,7 @@ const Tag = props => {
 
 const ItemForm = props => {
 
-    const [ image, setImage ] = useState( "/no-image.png");
+    const [ image, setImage ] = useState( "/assets/no-image.png");
 
 
     const [ title, setTitle ] = useState("");
