@@ -75,7 +75,9 @@ const ItemForm = props => {
     //alert(image1);
 
     return(
-        <Modal modalId="itemModal" title={props.title} cancelText="Cancel" role="itemModal" submitText={props.subBtnTitle}>
+        <Modal modalId="itemModal" title={props.title} cancelText="Cancel" role="itemModal" submitText={props.subBtnTitle}
+            onSubmit={()=>{}} onCancel={()=>{}}
+        >
             <div className='contenair-fluid'>
                 <form className='row'>
                     

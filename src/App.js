@@ -48,7 +48,7 @@ const mapData = data => {
 const App = () => {
     
     const [data, setData]  = useState([]);
-    const main_block = useRef();
+    const [ actifUser, setActifUser ] = useState({});
 
     useEffect( ()=>{
        fetch("api/items")
@@ -59,8 +59,8 @@ const App = () => {
 
     return(
         <div className='App container-fluid'>
-            <Loading data={data} main_block={main_block} />
-            <LoginForm />
+            <Loading data={data} />
+            <LoginForm actifUserSetHandeler={setActifUser} />
             <ItemForm title="Add New Item" subBtnTitle="Add"/>
 
             <div className='header row border-bottom'>
@@ -70,7 +70,7 @@ const App = () => {
             </div>
 
             {/* body  */}
-            <div ref={main_block} className={`main-block container m-auto body row`}>
+            <div className={`main-block container m-auto body row`}>
                 
                 {/* top-bar  */}
                 <div className='col-12 p-3 d-flex'>

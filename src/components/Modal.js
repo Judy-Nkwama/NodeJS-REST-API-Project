@@ -17,8 +17,8 @@ export const Modal = props => {
                         {props.children}
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal">{props.cancelText}</button>
-                        <button type="button" className="btn btn-success">{props.submitText}</button>
+                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={props.onCancel}>{props.cancelText}</button>
+                        <button type="button" className="btn btn-success" onClick={props.onSubmit}>{props.submitText}</button>
                     </div>
                 </div>
             </div>
