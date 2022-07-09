@@ -39,7 +39,7 @@ userRooter.post("/auth", async (req, res) => {
     pool.getConnection((err, connection) => {
 
         if(err) return res.status(504).send(sendError(`An internal error occured when connecteing to the DataBase : ${err.message}`));
-        connection.query(`SELECT id, name, email FROM users WHERE email='${user.email}'`, async (err, rows) => {
+        connection.query(`SELECT id, name, email, password FROM users WHERE email='${user.email}'`, async (err, rows) => {
                 
             //releasing the connection object after we are done with it
             connection.release();
@@ -47,17 +47,21 @@ userRooter.post("/auth", async (req, res) => {
             if(err) return res.status(504).send(sendError(`An internal error occured when fetching data from the DataBase : ${err.message}`));
             if(rows.length < 1) return res.status(404).send(sendError("Account not found"));
             if( !(await bcrypt.compare(user.password, rows[0].password)) ) return res.status(400).send(sendError("Password incoret"));
-            
-            const token = await jwt.sign(req.body, privateKey, { expiresIn: config.sessionDuration });
-            console.log(token);
-            res.set({"x-json-web-token" : token});
-            res.send(rows);
+           
+            const token = await jwt.sign(
+                {id : rows[0].id, name : rows[0].name, email : rows[0].email}, 
+                privateKey, 
+                { expiresIn: config.sessionDuration }
+            );
+
+            res.set({
+                "x-json-web-token" : token,
+                "Set-Cookie" : `token=${token}; path=/api/;`
+            });
+            res.send([{id : rows[0].id, name : rows[0].name, email : rows[0].email}]);
 
         });
-
     });
-
-
 });
 
 userRooter.post("/", async (req, res) => {
@@ -72,7 +76,6 @@ userRooter.post("/", async (req, res) => {
     pool.getConnection( async (err, connection) => {
 
         if(err) return res.status(504).send(sendError(`An internal error occured when connecteing to the DataBase : ${err.message}`));
-        
         let salt;
         try{
             salt = await bcrypt.genSaltSync(10);
@@ -96,10 +99,14 @@ userRooter.post("/", async (req, res) => {
 userRooter.get("/me", oauth, (req, res) => {
 
     const token = req.get("x-json-web-token");
-    const user = jwt.verify(token, privateKey);
+    let user;
+    try {
+        user = jwt.verify(token, privateKey);
+    } catch (error) {
+        return res.status(400).send(sendError("Session probably expired. Try to login again please"))
+    }
     res.send(user);
 
 });
-
 
 module.exports = userRooter;
