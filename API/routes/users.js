@@ -58,7 +58,7 @@ userRooter.post("/auth", async (req, res) => {
                 "x-json-web-token" : token,
                 "Set-Cookie" : `token=${token}; path=/api/;`
             });
-            res.send([{id : rows[0].id, name : rows[0].name, email : rows[0].email}]);
+            res.status(200).send({id : rows[0].id, name : rows[0].name, email : rows[0].email});
 
         });
     });

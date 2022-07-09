@@ -6,21 +6,10 @@ import ItemForm from "./components/ItemForm";
 import LoginForm from "./components/LoginForm";
 import Item from "./components/Item";
 import Loading from "./components/Loading";
+import User from './components/User';
 
-/*
-const data = [
-    {
-        id : 123,
-        image : "https://avatars.mds.yandex.net/i?id=2d657aaff0283cf3f53374c46d33cfe3-4230974-images-thumbs&n=13",
-        title : "Nike T-shirt",
-        description : "A nice nike brand t-shirt for summer", 
-        tagLine : ["Clothes", "Summer", "T-shirt", "Red"],
-        colors : ["#db143c", "#ffce2c"],
-        price : 12,
-        ownerId : "Me"
-    }
-]
-*/
+
+
 
 const mapData = data => {
     if( data.length > 0 ){
@@ -48,10 +37,10 @@ const mapData = data => {
 const App = () => {
     
     const [data, setData]  = useState([]);
-    const [ actifUser, setActifUser ] = useState({});
+    const [ actifUser, setActifUser ] = useState();
 
     useEffect( ()=>{
-       fetch("api/items")
+        fetch("api/items")
         .then( response => response.json())
         .then( data => { setData(data);})
         .catch(err => { console.log(err); });
@@ -59,13 +48,18 @@ const App = () => {
 
     return(
         <div className='App container-fluid'>
+            
             <Loading data={data} />
             <LoginForm actifUserSetHandeler={setActifUser} />
             <ItemForm title="Add New Item" subBtnTitle="Add"/>
 
             <div className='header row border-bottom'>
                 <div className='col text-end pt-1 me-1'>
-                    <ModelToggler className="btn btn-sm btn-primary" modalId="loginPopUp">login</ModelToggler> 
+                    { 
+                        actifUser ? <User user={actifUser} onLogout={()=>{}}/>: 
+                        <ModelToggler className="btn btn-sm btn-primary" modalId="loginPopUp">login</ModelToggler> 
+                    }
+                     
                 </div>
             </div>
 

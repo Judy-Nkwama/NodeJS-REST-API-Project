@@ -18,7 +18,30 @@ const LoginModal = props => {
     };
 
     const handleOnSubmit = () => {
-        //fetch({}, {})
+
+        fetch("/api/users/auth", {
+            "method" : "POST",
+            headers : {
+                "Content-Type" : "application/json",
+            },
+            body : JSON.stringify({
+                email: loginFormData.email,
+                password: loginFormData.password,
+                rememberMe: loginFormData.rememberMe
+            })
+        })
+        .then( response => response.json() )
+        .then( data => {
+            if(data.error) {
+                setLoginFormData({...loginFormData, errorMessage :  data.error.message });
+            }else{
+                props.actifUserSetHandeler(data);
+            } 
+        })
+        .catch( err => {
+            console.log(err.message);
+        })
+
     };
 
     const handleOnCancel = () => {
@@ -26,7 +49,6 @@ const LoginModal = props => {
     }
 
     //props.actifUserSetHandeler();
-    
 
     return(
         <Modal modalId="loginPopUp" title="Login" cancelText="Cancel" submitText="Login" role="loginModal" 
@@ -51,6 +73,7 @@ const LoginModal = props => {
                     />
                     <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
                 </div>
+                <div className='text-danger'>{loginFormData.errorMessage}</div>
             </form>
         </Modal>
     );

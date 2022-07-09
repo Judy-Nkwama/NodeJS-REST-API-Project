@@ -7,7 +7,7 @@
 }
 
 .header{
-    height: 50px;
+    height: 55px;
 }
 
 .item-image-block{
@@ -23,4 +23,12 @@
 
 .loading{
     z-index: 2000;
+}
+
+.avatar{
+    width: 45px;
+}
+
+.username{
+    color: dimgray;
 }
